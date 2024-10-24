@@ -1,28 +1,24 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import axios from 'axios';
+import { FavoritesContext } from '../context/FavoritesContext'; 
 import '../styles/MovieDetailsPage.css';
-
 const MovieDetailsPage = () => {
 const { id } = useParams();
-const [isFavorite, setIsFavorite] = useState(false);
+const { isFavorite, addFavorite, removeFavorite } = useContext(FavoritesContext);
 
-useEffect(() => {
-    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
-    setIsFavorite(favoriteMovies.includes(id));
-}, [id]);
 
-const handleFavoriteToggle = () => {
-    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
-    if (isFavorite) {
-        const updatedFavorites = favoriteMovies.filter(movieId => movieId !== id);
-        localStorage.setItem('favoriteMovies', JSON.stringify(updatedFavorites));
+const handleFavoriteToggle = (movie) => {
+    if (isFavorite(movie.imdbID)) {
+        console.log('removing favorite');
+        removeFavorite(movie.imdbID);
     } else {
-        favoriteMovies.push(id);
-        localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+        console.log('adding favorite');
+        addFavorite(movie);
     }
-    setIsFavorite(!isFavorite);
 };
+
+
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -65,8 +61,8 @@ return (
                     <p className="movie-description">Director: {movie.Director}</p>
                     <p className="movie-description">Actors: {movie.Actors}</p>
                     <p className="movie-plot">{movie.Plot}</p>
-                    <button onClick={handleFavoriteToggle} className={isFavorite ? 'remove-favorites' : 'add-favorites'}>
-                        {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                    <button onClick={()=>handleFavoriteToggle(movie)} className={isFavorite(movie.imdbID) ? 'remove-favorites' : 'add-favorites'}>
+                        {isFavorite(movie.imdbID) ? 'Remove from Favorites' : 'Add to Favorites'}
                     </button>
                 </div>
             </div>
