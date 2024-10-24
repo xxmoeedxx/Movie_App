@@ -47,6 +47,44 @@
     font-size: 1.1rem;
 }
 
+.remove-favorites {
+    background-color: #e03e00;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.remove-favorites:hover {
+    background-color: #ff4500;
+}
+
+.remove-favorites:active {
+    background-color: #e03e00;
+}
+
+.add-favorites {
+    background-color: #ff4c4c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-favorites:hover {
+    background-color: #ff3333;
+}
+
+.add-favorites:active {
+    background-color: #e60000;
+}
+
 .movie-description {
     font-size: 1rem;
     line-height: 1.6;

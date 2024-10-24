@@ -37,7 +37,7 @@ const HomePage = () => {
     if (query) {
       fetchMovies(query);
     } else {
-      fetchMovies('trending'); // Fetch trending movies by default
+      fetchMovies('avengers'); // Fetch avengers movies by default
     }
   }, []);
 

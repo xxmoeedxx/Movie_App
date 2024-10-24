@@ -12,6 +12,7 @@
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #e0e0e0; /* Softer border */
+    max-width: calc(25% - 40px); /* Ensure items don't stretch too much */
     border-radius: 12px; /* Rounded corners */
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -20,7 +21,30 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Ensure proper spacing between elements */
+    height: 600px; /* Ensure the item takes up the full height */
 }
+
+@media (max-width: 1200px) {
+    .movie-item {
+        flex: 1 1 calc(33% - 40px); /* 3 items per row on medium screens */
+        max-width: calc(33% - 40px);
+    }
+}
+
+@media (max-width: 900px) {
+    .movie-item {
+        flex: 1 1 calc(50% - 40px); /* 2 items per row on small screens */
+        max-width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 600px) {
+    .movie-item {
+        flex: 1 1 calc(100% - 40px); /* 1 item per row on very small screens */
+        max-width: calc(100% - 40px);
+    }
+}
+   
 
 .movie-item:hover {
     transform: scale(1.05);
@@ -29,7 +53,7 @@
 
 .movie-item img {
     width: 100%; /* Ensure the image scales with the container */
-    height: auto; /* Maintain the aspect ratio */
+    height: 360ox; /* Maintain the aspect ratio */
     display: block;
 }
 
@@ -42,7 +66,14 @@
     background-color: #fafafa; /* Light background for title */
     border-bottom: 1px solid #eee; /* Separate the title with a subtle line */
 }
-
+.movie-item .movie-title .heart-button{
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 .movie-item .movie-description {
     padding: 15px 10px;
     font-size: 0.95em; /* Slightly increase the font size */
