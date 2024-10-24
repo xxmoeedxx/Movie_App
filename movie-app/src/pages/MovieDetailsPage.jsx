@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/MovieDetailsPage.css';
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
@@ -12,9 +13,7 @@ const MovieDetailsPage = () => {
     const fetchMovieDetails = async () => {
       setLoading(true);
       try {
-        console.log(id);
         const response = await axios.get(`https://omdbapi.com/?apikey=23eb8b7a&i=${id}`);
-        console.log(response.data);
         setMovie(response.data);
         setError(null);
       } catch (err) {
@@ -31,19 +30,25 @@ const MovieDetailsPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <div className="movie-details-container">
       {movie && (
-        <>
-          <h1>{movie.Title}</h1>
-          <p>Release Date: {movie.Released}</p>
-          <p>Rating: {movie.imdbRating}</p>
-          <p>Plot: {movie.Plot}</p>
-            <img src={movie.Poster} alt={movie.Title} />
-              <p>Genre: {movie.Genre}</p>
-              <p>Director: {movie.Director}</p>
-              <p>Actors: {movie.Actors}</p>
-              <p>Runtime: {movie.Runtime}</p>
-        </>
+        <div className="movie-details">
+          <img
+            src={movie.Poster !== 'N/A' ? movie.Poster : '/placeholder-image.png'}
+            alt={movie.Title}
+            className="movie-poster"
+          />
+          <div className="movie-info">
+            <h1 className="movie-title">{movie.Title}</h1>
+            <p className="movie-meta">
+              Release Date: {movie.Released} | Rating: {movie.imdbRating} | Runtime: {movie.Runtime}
+            </p>
+            <p className="movie-description">Genre: {movie.Genre}</p>
+            <p className="movie-description">Director: {movie.Director}</p>
+            <p className="movie-description">Actors: {movie.Actors}</p>
+            <p className="movie-plot">{movie.Plot}</p>
+          </div>
+        </div>
       )}
     </div>
   );
