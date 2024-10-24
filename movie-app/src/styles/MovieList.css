@@ -1,0 +1,73 @@
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f4f4f9; /* Softer background color */
+    justify-content: center; /* Center the movie items */
+}
+
+.movie-item {
+    flex: 1 1 calc(25% - 40px);
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #e0e0e0; /* Softer border */
+    border-radius: 12px; /* Rounded corners */
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure proper spacing between elements */
+}
+
+.movie-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.movie-item img {
+    width: 100%; /* Ensure the image scales with the container */
+    height: auto; /* Maintain the aspect ratio */
+    display: block;
+}
+
+.movie-item .movie-title {
+    font-size: 1.4rem; /* Make title slightly larger */
+    font-weight: bold;
+    padding: 15px 10px; /* More padding for better spacing */
+    text-align: center;
+    color: #333; /* Darker text color */
+    background-color: #fafafa; /* Light background for title */
+    border-bottom: 1px solid #eee; /* Separate the title with a subtle line */
+}
+
+.movie-item .movie-description {
+    padding: 15px 10px;
+    font-size: 0.95em; /* Slightly increase the font size */
+    color: #666;
+    line-height: 1.5; /* Improve readability */
+    text-align: center; /* Center-align text */
+    background-color: #fafafa; /* Add a subtle background to description */
+    flex-grow: 1; /* Ensure the description takes up available space */
+}
+
+/* Add media queries to improve responsiveness */
+@media (max-width: 1200px) {
+    .movie-item {
+        flex: 1 1 calc(33% - 40px); /* 3 items per row on medium screens */
+    }
+}
+
+@media (max-width: 900px) {
+    .movie-item {
+        flex: 1 1 calc(50% - 40px); /* 2 items per row on small screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .movie-item {
+        flex: 1 1 100%; /* 1 item per row on very small screens */
+    }
+}
